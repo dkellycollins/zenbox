@@ -6,24 +6,19 @@ import { SceneContainer } from "./SceneContainer";
  */
 export class World {
 
-  /**
-   * The singleton instance of the World.
-   */
-  public static instance = new World();
-
-  private camera: Camera = new PerspectiveCamera(70, window.innerWidth / window.innerHeight, 0.01, 10);
-  private renderer: Renderer = new WebGLRenderer({ antialias: true });
+  private camera: PerspectiveCamera;
+  private renderer: Renderer;
   private _sceneContainer: SceneContainer | undefined;
 
-  /**
-   * Sets up required assets and returns the canvas elements that scenes will be rendered too.
-   * 
-   * @returns {HTMLCanvasElement} - The canvas element that should be appended to the document.
-   */
-  public init = () => {
+  public constructor(width: number, height: number) {
+    this.camera = new PerspectiveCamera(70, width / height, 0.01, 10);
     this.camera.position.z = 1;
-    this.renderer.setSize(window.innerWidth, window.innerHeight);
 
+    this.renderer = new WebGLRenderer({ antialias: true });
+    this.renderer.setSize(width, height);
+  }
+
+  public get canvasElement(): HTMLCanvasElement {
     return this.renderer.domElement;
   }
 
@@ -42,6 +37,19 @@ export class World {
   }
 
   /**
+   * Updates the size of the window. 
+   * 
+   * @param {number} width - The current width.
+   * @param {number} height - The current height.
+   */
+  public setSize(width: number, height: number) {
+    this.camera.aspect = window.innerWidth / window.innerHeight;
+    this.camera.updateProjectionMatrix();
+
+    this.renderer.setSize(width, height);
+  }
+
+  /**
    * Updates the canvas element.
    */
   public render = () => {
@@ -52,5 +60,4 @@ export class World {
     this._sceneContainer.onRender();
     this.renderer.render(this._sceneContainer.scene, this.camera);
   }
-
 }
