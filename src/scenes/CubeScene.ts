@@ -15,6 +15,8 @@ export class CubeScene implements SceneContainer {
     this._scene.add(this.mesh);
   }
 
+  public readonly title = 'Cube';
+
   public get scene(): Scene {
     return this._scene;
   }

@@ -4,14 +4,35 @@
     <meta http-equiv="Content-type" content="text/html; charset=utf-8"/>
     <title>Zenbox</title>
     <style>
-      .html .body {
+      html body {
         height: 100%;
         width: 100%;
         margin: 0;
         overflow: hidden;
       }
+
+      #canvas-container {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        overflow: hidden;
+      }
+
+      #ui-container {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        z-index: 10;
+        overflow: hidden;
+      }
     </style>
   </head>
   <body>
+    <div id="canvas-container"></div>
+    <div id="ui-container"></div>
   </body>
 </html>

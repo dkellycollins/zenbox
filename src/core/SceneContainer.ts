@@ -6,6 +6,11 @@ import { Scene } from "three";
 export interface SceneContainer {
 
   /**
+   * The title of the Scene to display in the UI.
+   */
+  readonly title: string;
+
+  /**
    * The scene instance.
    */
   readonly scene: Scene;
